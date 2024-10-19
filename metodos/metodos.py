@@ -1,16 +1,16 @@
 from clases.clase_cuenta import Cuenta
-from metodos.validaciones import validatedEmail, validatedSavings, typeValue
+from metodos.validaciones import validatedEmail, validatedSavings, validatedValue
 
 
 def crearCuenta() -> None:
 
-    idUser = typeValue(int,"Enter your ID: ")
-    name = typeValue(str,"Enter your full name: ")
-    age = typeValue(int,"Enter your age: ")
-    cash = typeValue(float,"Enter your full total money(MIN 50COP): ")
-    adress = typeValue(str,"Enter your address: ")
-    phone = typeValue(int,"Enter your number phone: ")
-    email = typeValue(str,"Enter your email: ")
+    idUser = validatedValue(int,"Enter your ID: ")
+    name = validatedValue(str,"Enter your full name: ")
+    age = validatedValue(int,"Enter your age: ")
+    cash = validatedValue(float,"Enter your full total money(MIN 50COP): ")
+    adress = validatedValue(str,"Enter your address: ")
+    phone = validatedValue(int,"Enter your number phone: ")
+    email = validatedValue(str,"Enter your email: ")
     if not validatedEmail(email):
         print("This email is NOT validated")
         return

@@ -1,17 +1,5 @@
 import re
 
-# if len(idUser) < 10 or len(idUser) > 11:
-#     print("I,m really sorry, your ID is NOT permitted, must be between 10 to 11 numbers.")
-
-# if age < 18:
-#     print("I,m really sorry, your age is NOT permitted, must be over 18.")
-
-# if cash < 50.000:
-#         print("I,m really sorry, your money is NOT permitted, must be over 50.000COP.")    
-
-# if len(phone) != 10:
-#     print("I'm very sorry, your number must be 10 to numbers.")
-
 def validatedEmail(email) -> bool:
     # Expresión regular para validar el formato del email
     patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
@@ -24,7 +12,7 @@ def validatedEmail(email) -> bool:
 
 
 
-def typeValue(typeData, text):
+def validatedValue(typeData, text):
 
     while True:
         try:
@@ -43,7 +31,7 @@ def validatedSavings(typeDate, date):
         if value == "NO":
             break
         elif value == "YES":
-            savings = typeValue(float,"Enter your saving cant: ")
+            savings = validatedValue(float,"Enter your saving cant: ")
             if savings == 0:
                 print("I'm really sorry, your savings cant is NOT permitted, must be over 0.0$")
                 continue
@@ -53,6 +41,20 @@ def validatedSavings(typeDate, date):
             print("This option is no validated.")
             continue
 
+## condicionales
 
-def __funcion():
-    pass
+def verificIdUser(idUser):
+    if len(idUser) < 10 or len(idUser) > 11:
+        print("I,m really sorry, your ID is NOT permitted, must be between 10 to 11 numbers.")
+
+def verifcAge(age):
+    if age < 18:
+        print("I,m really sorry, your age is NOT permitted, must be over 18.")
+
+def verificCash(cash):
+    if cash < 50.000:
+            print("I,m really sorry, your money is NOT permitted, must be over 50.000COP.")  
+              
+def verificPhone(phone):
+    if len(phone) != 10:
+        print("I'm very sorry, your number must be 10 to numbers.")
