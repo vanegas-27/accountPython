@@ -1,28 +1,40 @@
 from clases.clase_cuenta import Cuenta
-from metodos.validaciones import validatedEmail, validatedSavings, validatedValue
+import metodos.validaciones as mt
 
+__CUENTAS = []
 
 def crearCuenta() -> None:
 
-    idUser = validatedValue(int,"Enter your ID: ")
-    name = validatedValue(str,"Enter your full name: ")
-    age = validatedValue(int,"Enter your age: ")
-    cash = validatedValue(float,"Enter your full total money(MIN 50COP): ")
-    adress = validatedValue(str,"Enter your address: ")
-    phone = validatedValue(int,"Enter your number phone: ")
-    email = validatedValue(str,"Enter your email: ")
-    if not validatedEmail(email):
-        print("This email is NOT validated")
-        return
-    savings = validatedSavings(str, "Do you want to deposit to the savings account? YES/NO: ") or 0.0
-    DATA = [idUser, name, age, cash, adress, phone, email, savings]
+    idUser = mt.validatedValue(int,"Enter your ID: ","id")
+    name = mt.validatedValue(str,"Enter your full name: ")
+    age = mt.validatedValue(int,"Enter your age: ","age")  
+    cash = mt.validatedValue(float,"Enter your full total money(MIN 50COP): ","cash")
+    address = mt.validatedValue(str,"Enter your address: ")
+    phone = mt.validatedValue(int,"Enter your number phone: ","phone") 
+    email = mt.validatedValue(str,"Enter your email: ","email")
+    savings = mt.validatedSavings(str, "Do you want to deposit to the savings account? YES/NO: ") or 0.0
+
+    persona = Cuenta({
+        "id" : idUser,
+        "name" : name,
+        "age" : age,
+        "cash" : cash,
+        "address" : address,
+        "phone" : phone,
+        "email" : email,
+        "savings" : savings,
+    })
+
+    __CUENTAS.append({persona.getId() : persona})
+
 
 
 
 
 
 def verCuenta() -> None:
-    pass
+    for i in __CUENTAS:
+        print(i)
 
 def moverAhorros() -> None:
     pass

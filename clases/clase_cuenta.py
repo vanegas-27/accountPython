@@ -48,14 +48,14 @@ class Cuenta:
             @return None
         '''
     
-        self.__id = dic.id
-        self.__name = dic.name
-        self.__cash = dic.cash
-        self.__age = dic.age
-        self.__address = dic.address
-        self.__phone = dic.phone
-        self.__email = dic.email
-        self.__savings = dic.savings
+        self.__id = dic["id"]
+        self.__name = dic["name"]
+        self.__cash = dic["cash"]
+        self.__age = dic["age"]
+        self.__address = dic["address"]
+        self.__phone = dic["phone"]
+        self.__email = dic["email"]
+        self.__savings = dic["savings"]
         self.__location = self.__LOCATIONS[random.randint(0, len(self.__LOCATIONS) - 1)]
 
 
