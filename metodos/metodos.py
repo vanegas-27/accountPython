@@ -35,13 +35,20 @@ def crearCuenta() -> None:
 
     DATA = [idUser, name, age, cash, address, phone, email, location, savings, hashPassword]
 
-    pt.createUser("INSERT INTO `usuarios` (`id`, `name`, `age`, `cash`, `address`, `phone`, `email`, `location`, `ahorros`, `password`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",DATA)
+    pt.createUser("INSERT INTO `bancapython`.`usuarios` (`id`, `name`, `age`, `cash`, `address`, `phone`, `email`, `location`, `ahorros`, `password`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",DATA)
 
 
 
 
 def verCuenta() -> None:
-    pass
+    idUser = mt.validatedValue(int,"Enter your ID: ","id")
+    password = mt.validatedValue(str,"Enter your password: ")
+
+    password_encode = f"{password}".encode("utf-8")
+
+    query = "SELECT * FROM `bancapython`.`usuarios` WHERE id = %s;"
+
+    pt.viewUser(query,[idUser],password_encode)
 
 def moverAhorros() -> None:
     pass
