@@ -57,6 +57,7 @@ class Cuenta:
         self.__email = dic["email"]
         self.__savings = dic["savings"]
         self.__location = self.__LOCATIONS[random.randint(0, len(self.__LOCATIONS) - 1)]
+        self.__password = dic["password"]
 
 
 
