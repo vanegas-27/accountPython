@@ -21,4 +21,4 @@ def __cnx():
         database = __BD,
     )
 
-CNX = __cnx()
+CNX = __cnx

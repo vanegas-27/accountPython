@@ -1,7 +1,7 @@
 from clases.clase_cuenta import Cuenta
 import metodos.validaciones as mt
+import persistencia.persistencia as pt
 
-__CUENTAS = []
 
 def crearCuenta() -> None:
 
@@ -14,7 +14,7 @@ def crearCuenta() -> None:
     email = mt.validatedValue(str,"Enter your email: ","email")
     savings = mt.validatedSavings(str, "Do you want to deposit to the savings account? YES/NO: ") or 0.0
 
-    persona = Cuenta({
+    account = Cuenta({
         "id" : idUser,
         "name" : name,
         "age" : age,
@@ -24,17 +24,17 @@ def crearCuenta() -> None:
         "email" : email,
         "savings" : savings,
     })
+    location = account.getLocation()
 
-    __CUENTAS.append({persona.getId() : persona})
+    DATA = [idUser, name, age, cash, address, phone, email, location, savings]
 
-
+    pt.createUser("INSERT INTO `usuarios` (`id`, `name`, `age`, `cash`, `address`, `phone`, `email`, `location`, `ahorros`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);",DATA)
 
 
 
 
 def verCuenta() -> None:
-    for i in __CUENTAS:
-        print(i)
+    pass
 
 def moverAhorros() -> None:
     pass
