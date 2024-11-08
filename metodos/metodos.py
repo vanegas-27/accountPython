@@ -3,6 +3,20 @@ import metodos.validaciones as mt
 import persistencia.persistencia as pt
 import bcrypt
 
+__ACCOUNTS = []
+
+async def loadAccounts() -> None:
+    params = ["id","name","age","cash","address","phone","email","location", "savings","password"]
+    accounts = {}
+
+    rel = await pt.data()
+    if len(rel) > 0:
+        for tupleList in rel:
+            diccio = {}
+            for position in range(0 , len(params)):
+                diccio.update({params[position] : tupleList[position]})
+            accounts[tupleList[0]] = Cuenta(diccio)
+        __ACCOUNTS.append(accounts)
 
 def crearCuenta() -> None:
 
@@ -34,10 +48,9 @@ def crearCuenta() -> None:
     location = account.getLocation()
 
     DATA = [idUser, name, age, cash, address, phone, email, location, savings, hashPassword]
+    __ACCOUNTS.append({ idUser : account})
 
     pt.createUser("INSERT INTO `bancapython`.`usuarios` (`id`, `name`, `age`, `cash`, `address`, `phone`, `email`, `location`, `ahorros`, `password`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",DATA)
-
-
 
 
 def verCuenta() -> None:
@@ -48,7 +61,13 @@ def verCuenta() -> None:
 
     query = "SELECT * FROM `bancapython`.`usuarios` WHERE id = %s;"
 
-    pt.viewUser(query,[idUser],password_encode)
+    rel = pt.viewUser(query,[idUser],password_encode)
+
+    if rel:
+        print(rel)
+        for x in __ACCOUNTS:
+            print(x[idUser])
+
 
 def moverAhorros() -> None:
     pass
