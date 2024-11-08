@@ -1,6 +1,18 @@
 import bd.bd as BD
 from typing import List, Union
-import bcrypt , time
+import bcrypt 
+
+async def data() -> List[object]:
+    connet = BD.CNX()
+    cursor = connet.cursor()
+
+    query = "SELECT * FROM `usuarios`;"
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+
+    return data
+
 
 
 def createUser(query:str, data:List[Union[str,int,float]]):
@@ -18,7 +30,7 @@ def createUser(query:str, data:List[Union[str,int,float]]):
         print(e)
 
 
-def viewUser(query,data,password):
+def viewUser(query:str, data:List[str], password:str) -> bool:
 
     connet = BD.CNX()
     cursor = connet.cursor()
@@ -28,16 +40,17 @@ def viewUser(query,data,password):
 
     if result == None:
         print("I'm really sorry, this list is null")
-        return
+        return False
     
     contra = f"{result[-1]}".encode("utf-8")
 
     if bcrypt.checkpw(password, contra):
         print("This password is validated...")
-        time.sleep(2)
-        print(result)
-    else:
-        print("This password is not validated")
-
+        cursor.close()
+        connet.close()
+        return True
+    
+    print("This password is not validated")
     cursor.close()
     connet.close()
+    return False
