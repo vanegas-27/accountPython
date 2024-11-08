@@ -1,4 +1,6 @@
 
+import asyncio
+
 def main() -> str:
     return f'''
 -- -- -- CUENTAS BANCARIAS DEVANEGAS -- -- --
@@ -12,6 +14,7 @@ def main() -> str:
 '''
 if __name__ == "__main__":
     import metodos.metodos as mt
+    asyncio.run(mt.loadAccounts())
 
     # asignamos cada metodo a su correspondiente opcion
     __METODOS = {
